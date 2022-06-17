@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from "svelte";
+
   const stats = {
     "tr": "TR",
     "apm": "Attack per minute",
@@ -23,6 +25,26 @@
       : ["tr", "apm", "pps"];
 
   export let api_res;
+
+  
+
+  
+  function setDarkTheme() {
+    const light = document.getElementsByClassName("is-light");
+    for (let j = 0; j < 5; j++) {
+      for (let i = 0; i < light.length; i++) {
+        light[i].className = light[i].className.replace("is-light", "");
+      }
+    }
+    document.getElementById("table").className = "table is-dark is-bordered";
+  }
+
+  onMount(() => {if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    setDarkTheme();
+  }})
 </script>
 
 <h1 class="title is-5">Countries leaderboard</h1>

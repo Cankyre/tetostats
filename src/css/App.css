@@ -193,7 +193,8 @@ table td img {
 
 .ubox img {
   vertical-align: middle;
-  margin-left: 0.3em;
+  margin-left: 0.3em; 
+  margin-right: 0.3em; 
   height: 1.1em;
   clip-path: polygon(
     0.15em 0,
@@ -205,6 +206,18 @@ table td img {
     0 calc(100% - 0.15em),
     0 0.15em
   );
+}
+
+.abox {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.bbox {
+  flex: 4;
+  display: flex;
+  justify-content: space-between;
 }
 
 #api-outage-message {
@@ -234,10 +247,12 @@ table td img {
     margin-left: 50%;
     margin-bottom: 2em;
     transform: translate(-50%, 0);
+
   }
 
   #half1 {
-    overflow-y: scroll;
+    overflow-y: scroll; 
+    overflow-x: hidden !important;
   }
 
   #vhalf1 {

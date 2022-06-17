@@ -38,8 +38,55 @@
   {#await api_res.json()}
     <p style="color:lightgray">Parsing data...</p>
   {:then json}
-    {#if json == {}}
-      <p style="color:lightgray">No data found</p>
+    {#if json.type == 2}
+      <div class="card" id="playercard">
+        <div class="title-box">
+          <div class="bbox">
+            {#if !json.u1.avatar.endsWith("undefined")}
+              <img src={json.u1.avatar} class="avatar" alt="Player's avatar" />
+            {/if}
+            <div class="ubox">
+              <h4 class="subtitle is-4">{name.split(" ")[0].toUpperCase()}</h4>
+              <img src="https://tetr.io/res/flags/{json.u1.country.toLowerCase()}.png" alt="Player's flag"/>
+            </div>
+            <div class="badges">
+              {#each json.u1.badges.slice(json.u2.badges.length > 5 ? json.u2.badges.length - 6 : 0) as badge}
+                <img src="https://tetr.io/res/badges/{badge}.png" alt={badge}>
+              {/each}
+            </div>
+          </div>
+          <div class="abox">
+            <h4 class="title is-3">VS</h4>
+          </div>
+          <div class="bbox">
+            <div class="badges">
+              {#each json.u2.badges.slice(json.u2.badges.length > 5 ? json.u2.badges.length - 6 : 0) as badge}
+                <img src="https://tetr.io/res/badges/{badge}.png" alt={badge}>
+              {/each}
+            </div>
+            <div class="ubox">
+              <img src="https://tetr.io/res/flags/{json.u1.country.toLowerCase()}.png" alt="Player's flag"/>
+              <h4 class="subtitle is-4">{name.split(" ")[1].toUpperCase()}</h4>
+            </div>
+            {#if !json.u2.avatar.endsWith("undefined")}
+              <img src={json.u2.avatar} class="avatar" alt="Player's avatar" />
+            {/if}
+          </div>
+        </div>
+        <div class="card-grid">
+          {#each stats as stat}
+            <div class="grid-entry">
+              <h4 class="title is-6">{stat.toUpperCase()}</h4>
+              <h4 class="subtitle is-6">{json.u1[stat].toFixed(2)} <span style="color: {
+                  (json.u1[stat] > json.u2[stat]) ? "green" : "red"
+              }">{
+                  ((json.u1[stat] > json.u2[stat]) ? "+" : "") +
+                ((json.u1[stat] - json.u2[stat]) / json.u2[stat] * 100).toFixed(2) + "%"
+              }</span> {json.u2[stat].toFixed(2)}</h4>
+            </div>
+          {/each}
+        </div>
+      </div>
     {:else}
       <div class="card" id="playercard">
         <div class="title-box">
