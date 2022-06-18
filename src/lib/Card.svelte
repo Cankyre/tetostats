@@ -162,14 +162,14 @@
                   } else if (json.tr < JSON.parse(localStorage.getItem("old_" + name)).tr) {
                     return '<span style="color: red"> 🡾 </span>'
                   } else {
-                    return " 🡺 "
+                    return '<span style="color: lightgrey"> 🡺 </span>'
                   }
                 } else {
-                     return ""
+                     return '<span style="color: lightgrey"> 🡺 </span>'
                 }
               } catch (err) {
                 console.error(err)
-                  return " 🡺 "
+                  return '<span style="color: lightgrey"> 🡺 </span>'
                 }
               })()
             }{json.tr.toFixed(
@@ -189,7 +189,7 @@
                       } else if (json[stat] < JSON.parse(localStorage.getItem("old_" + name))[stat]) {
                         return '<span style="color: red"> 🡾 </span>'
                       } else {
-                        return " 🡺 "
+                        return '<span style="color: lightgrey"> 🡺 </span>'
                       }
                     } else {
                       return ""
