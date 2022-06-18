@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher, onMount } from 'svelte';
+  import { onMount } from 'svelte';
 
   const stats = [
     "tr",
@@ -15,9 +15,12 @@
   ]
 
   var value = "";
-  var name = "cookie";
+  var name = localStorage.getItem('username') || "cookie";
   onMount(() => document.getElementById("playername").addEventListener("keypress", function(e) {
     if (e.key == "Enter") {
+      if (e.shiftKey) {
+        localStorage.setItem('username', value)
+      }
       name = value
     }
   })) </script>
@@ -28,7 +31,7 @@
   class="input"
   id="playername"
   type="text"
-  placeholder="Enter player"
+  placeholder="Enter player, Shift+Enter to set as default"
 />
 
 
@@ -45,12 +48,15 @@
             {#if !json.u1.avatar.endsWith("undefined")}
               <img src={json.u1.avatar} class="avatar" alt="Player's avatar" />
             {/if}
-            <div class="ubox">
-              <h4 class="subtitle is-4">{name.split(" ")[0].toUpperCase()}</h4>
-              <img src="https://tetr.io/res/flags/{json.u1.country.toLowerCase()}.png" alt="Player's flag"/>
+            <div class="battle-name-box">
+              <div class="ubox">
+                <h4 class="subtitle is-4">{name.split(" ")[0].toUpperCase()}</h4>
+                <img src="https://tetr.io/res/flags/{json.u1.country.toLowerCase()}.png" alt="Player's flag"/>
+              </div>
+              <h4 class="title is-5" style="color: {(json.wc > 50) ? "green" : "red"}">{json.wc}%</h4>
             </div>
             <div class="badges">
-              {#each json.u1.badges.slice(json.u2.badges.length > 5 ? json.u2.badges.length - 6 : 0) as badge}
+              {#each json.u1.badges.slice(json.u1.badges.length > 3 ? json.u1.badges.length - 4 : 0) as badge}
                 <img src="https://tetr.io/res/badges/{badge}.png" alt={badge}>
               {/each}
             </div>
@@ -60,16 +66,21 @@
           </div>
           <div class="bbox">
             <div class="badges">
-              {#each json.u2.badges.slice(json.u2.badges.length > 5 ? json.u2.badges.length - 6 : 0) as badge}
+              {#each json.u2.badges.slice(json.u2.badges.length > 3 ? json.u2.badges.length - 4 : 0) as badge}
                 <img src="https://tetr.io/res/badges/{badge}.png" alt={badge}>
               {/each}
             </div>
-            <div class="ubox">
-              <img src="https://tetr.io/res/flags/{json.u1.country.toLowerCase()}.png" alt="Player's flag"/>
-              <h4 class="subtitle is-4">{name.split(" ")[1].toUpperCase()}</h4>
+            <div class="battle-name-box">
+              <div class="ubox">
+                <img src="https://tetr.io/res/flags/{json.u1.country.toLowerCase()}.png" alt="Player's flag"/>
+                <h4 class="subtitle is-4">{name.split(" ")[1].toUpperCase()}</h4>
+              </div>
+              <h4 class="title is-5" style="color: {(100-json.wc > 50) ? "green" : "red"}">{(100-json.wc).toFixed(3)}%</h4>
             </div>
             {#if !json.u2.avatar.endsWith("undefined")}
               <img src={json.u2.avatar} class="avatar" alt="Player's avatar" />
+            {:else}
+              <div class="default-avatar"></div>
             {/if}
           </div>
         </div>

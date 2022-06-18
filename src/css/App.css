@@ -136,6 +136,13 @@ table td img {
   border-radius: 15%;
 }
 
+.default-avatar {
+  width: 3em;
+  height: 3em;
+  border-radius: 15%;
+  border: 1px black solid;
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -224,6 +231,22 @@ table td img {
   width: 80vw;
   margin-left: 50%;
   transform: translate(-50%, 0);
+}
+
+.battle-name-box .ubox {
+  display: flex;
+  align-items: center;
+  height: 1.5em;
+}
+
+.battle-name-box * {
+  text-align: center;
+}
+
+.battle-name-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media screen and (max-width: 900px) {
