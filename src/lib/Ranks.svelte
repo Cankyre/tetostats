@@ -32,11 +32,11 @@
           <span class="hiddable">TR</span>
           {@html  (() => {
               if (api_res.ranks_variations[r] > 0) {
-                return '<span class="arrow" style="color: #888"> 🡽 </span>'
+                return '<span class="arrow" style="color: white"> 🡽 </span>'
               } else if (api_res.ranks_variations[r] < 0) {
-                return '<span class="arrow" style="color: #888"> 🡾 </span>'
+                return '<span class="arrow" style="color: white"> 🡾 </span>'
               } else {
-                return '<span class="arrow" style="color: #888"> 🡺 </span>'
+                return '<span class="arrow" style="color: white"> 🡺 </span>'
               }
           })()}
         </p>
