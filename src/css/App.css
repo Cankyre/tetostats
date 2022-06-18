@@ -126,8 +126,23 @@ table td img {
   height: 3em;
 }
 
-.title-box > h4 {
+.title-box h4 {
   margin-bottom: 0 !important;
+}
+
+.title-box button {
+  height: 1.5em;
+}
+
+.player-desc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3em;
+}
+
+.player-desc img {
+  margin-right: 0.8em;
 }
 
 .avatar {
@@ -225,6 +240,14 @@ table td img {
   flex: 4;
   display: flex;
   justify-content: space-between;
+}
+
+.bbox.end {
+  justify-content: flex-end;
+}
+
+.playercard.single .bbox {
+  flex: 1;
 }
 
 #api-outage-message {
