@@ -28,7 +28,18 @@
     <div class="ranks_row" style="background-color: {ranks_colors[r] || "black"}">
       <div class="a">
         <img src="https://tetr.io/res/league-ranks/{r}.png" alt={r}>
-        <p>{api_res.ranks_boundaries[r].toFixed()}<span class="hiddable">TR</span></p>
+        <p>{api_res.ranks_boundaries[r].toFixed()}
+          <span class="hiddable">TR</span>
+          {@html  (() => {
+              if (api_res.ranks_variations[r] > 0) {
+                return '<span class="arrow" style="color: #888"> 🡽 </span>'
+              } else if (api_res.ranks_variations[r] < 0) {
+                return '<span class="arrow" style="color: #888"> 🡾 </span>'
+              } else {
+                return '<span class="arrow" style="color: #888"> 🡺 </span>'
+              }
+          })()}
+        </p>
       </div>
       <div>
         <p>
@@ -37,12 +48,7 @@
       </div>
       <div>
         <p>{
-          api_res.ranks_percentiles[r] -
-          (Object.values(api_res.ranks_percentiles)[
-            Object.values(api_res.ranks_percentiles).indexOf(
-              api_res.ranks_percentiles[r]
-            ) - 1
-          ] || 0)
+          (100 * api_res.ranks_playernum[r] / api_res["ranked_num"]).toFixed(2)
         }% <span class="hiddable">({api_res.ranks_percentiles[r]}%)</span></p>
       </div>
     </div>
