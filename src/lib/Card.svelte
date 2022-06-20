@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import Switch from './Switch.svelte'
+  import { Tabs, TabList, TabPanel, Tab } from './Tabs/tabs.js';
 
   const stats = [
     "tr",
@@ -149,62 +150,79 @@
             <Switch bind:value={sliderValue} label="Track" fontSize={16} design="slider" checked={!!(tracked.indexOf(name) + 1)}/>
           </div>
           </div>
-          
-        <div class="card-grid">
-          <div class="grid-entry">
-            <h4 class="title is-6">TR</h4>
-            <h4 class="subtitle is-6">{ @html
-              (() => {
-                try {
-                  if (tracked.indexOf(name) + 1) {
-                  if (json.tr > JSON.parse(localStorage.getItem("old_" + name)).tr) {
-                    return '<span style="color: green"> 🡽 </span>'
-                  } else if (json.tr < JSON.parse(localStorage.getItem("old_" + name)).tr) {
-                    return '<span style="color: red"> 🡾 </span>'
-                  } else {
-                    return '<span style="color: lightgrey"> 🡺 </span>'
-                  }
-                } else {
-                     return '<span style="color: lightgrey"> 🡺 </span>'
-                }
-              } catch (err) {
-                console.error(err)
-                  return '<span style="color: lightgrey"> 🡺 </span>'
-                }
-              })()
-            }{json.tr.toFixed(
-              2
-            )}<img src="https://tetr.io/res/league-ranks/{json.rank}.png" alt="TR"/></h4>
-          </div>
-          {#each stats.slice(1) as stat}
-            <div class="grid-entry">
-              <h4 class="title is-6">{stat.toUpperCase()}</h4>
-              <h4 class="subtitle is-6">
-                { @html
+        <Tabs>
+          <TabPanel>
+            <div class="card-grid">
+              <div class="grid-entry">
+                <h4 class="title is-6">TR</h4>
+                <h4 class="subtitle is-6">{ @html
                   (() => {
                     try {
                       if (tracked.indexOf(name) + 1) {
-                      if (json[stat] > JSON.parse(localStorage.getItem("old_" + name))[stat]) {
+                      if (json.tr > JSON.parse(localStorage.getItem("old_" + name)).tr) {
                         return '<span style="color: green"> 🡽 </span>'
-                      } else if (json[stat] < JSON.parse(localStorage.getItem("old_" + name))[stat]) {
+                      } else if (json.tr < JSON.parse(localStorage.getItem("old_" + name)).tr) {
                         return '<span style="color: red"> 🡾 </span>'
                       } else {
                         return '<span style="color: lightgrey"> 🡺 </span>'
                       }
                     } else {
-                      return ""
+                         return ''
                     }
                   } catch (err) {
                     console.error(err)
                       return '<span style="color: lightgrey"> 🡺 </span>'
                     }
                   })()
-                }
-                {json[stat].toFixed(2)}
-              </h4>
+                }{json.tr.toFixed(
+                  2
+                )}<img src="https://tetr.io/res/league-ranks/{json.rank}.png" alt="TR"/></h4>
+              </div>
+              {#each stats.slice(1) as stat}
+                <div class="grid-entry">
+                  <h4 class="title is-6">{stat.toUpperCase()}</h4>
+                  <h4 class="subtitle is-6">
+                    { @html
+                      (() => {
+                        try {
+                          if (tracked.indexOf(name) + 1) {
+                          if (json[stat] > JSON.parse(localStorage.getItem("old_" + name))[stat]) {
+                            return '<span style="color: green"> 🡽 </span>'
+                          } else if (json[stat] < JSON.parse(localStorage.getItem("old_" + name))[stat]) {
+                            return '<span style="color: red"> 🡾 </span>'
+                          } else {
+                            return '<span style="color: lightgrey"> 🡺 </span>'
+                          }
+                        } else {
+                          return ""
+                        }
+                      } catch (err) {
+                        console.error(err)
+                          return '<span style="color: lightgrey"> 🡺 </span>'
+                        }
+                      })()
+                    }
+                    {json[stat].toFixed(2)}
+                  </h4>
+                </div>
+              {/each}
             </div>
-          {/each}
-        </div>
+          </TabPanel>
+
+          <TabPanel>
+            <h2>Second panel</h2>
+          </TabPanel>
+        
+          <TabPanel>
+            <h2>Third panel</h2>
+          </TabPanel>
+
+          <TabList>
+            <Tab>Tetra League</Tab>
+            <Tab>Sprint (40l)</Tab>
+            <Tab>Blitz</Tab>
+          </TabList>
+        </Tabs>
       </div>
     {/if}
   {:catch}
