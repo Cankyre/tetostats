@@ -165,7 +165,7 @@
                     return '<span style="color: lightgrey"> 🡺 </span>'
                   }
                 } else {
-                     return '<span style="color: lightgrey"> 🡺 </span>'
+                     return ''
                 }
               } catch (err) {
                 console.error(err)
