@@ -134,7 +134,7 @@
               <img src={json.avatar} class="avatar" alt="Player's avatar" />
               {/if}
               <div class="ubox">
-                <h4 class="subtitle is-4">{name.toUpperCase()}</h4>
+                <h4 class="subtitle is-4 hiddable vhiddable">{name.toUpperCase()}</h4>
                 <img src="https://tetr.io/res/flags/{json.country.toLowerCase()}.png" alt="Player's flag"/>
               </div>
             </div>

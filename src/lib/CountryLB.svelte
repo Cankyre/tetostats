@@ -64,9 +64,9 @@
         <th>Country</th>
         <th>Flag</th>
         <th>{sortBy.toUpperCase()}</th>
-        <th class="hiddable">{moreData[0].toUpperCase()}</th>
-        <th class="hiddable">{moreData[1].toUpperCase()}</th>
-        <th class="hiddable">{moreData[2].toUpperCase()}</th>
+        <th class="hiddable vhiddable">{moreData[0].toUpperCase()}</th>
+        <th class="hiddable vhiddable">{moreData[1].toUpperCase()}</th>
+        <th class="hiddable vhiddable">{moreData[2].toUpperCase()}</th>
       </tr>
     </thead>
     <tbody>
@@ -79,7 +79,7 @@
           </td>
           <td>{(api_res["country_lbs"][sortBy][r]).toFixed(2)}</td>
           {#each moreData as l}
-            <td class="hiddable">{(api_res["country_lbs"][l][r]).toFixed(2)}</td>
+            <td class="hiddable vhiddable">{(api_res["country_lbs"][l][r]).toFixed(2)}</td>
           {/each}    
         </tr>
       {/each}

@@ -19,7 +19,10 @@ body {
 }
 
 .app {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 80vh;
 }
 
 .half {
@@ -29,18 +32,24 @@ body {
 }
 
 #half1 {
+  grid-row: 1 / 3;
+  grid-column: 1;
   border-right: 1px #444 solid;
   overflow-y: scroll;
 }
 
 #vhalf1 {
-  height: 50%;
+  grid-row: 1;
+  grid-column: 2;
+  height: 40vh;
   border-bottom: 1px #444 solid;
   padding: 0 5%;
 }
 
 #vhalf2 {
-  height: 50%;
+  grid-row: 2;
+  grid-column: 2;
+  height: 40vh;
   padding: 5% 1%;
 }
 
@@ -342,7 +351,112 @@ table td img {
   }
 }
 
+@media screen and (max-height: 600px) and (min-width: 600px) {
+  .app {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    height: 80vh;
+  }  
+
+  #half1 {
+    grid-row: 1;
+    grid-column: 1;
+    border-right: 1px #444 solid;
+    width: 33vw;
+    overflow-y: scroll;
+  }
+  
+  #vhalf1 {
+    grid-row: 1;
+    grid-column: 2;
+    height: 80vh;
+    border-bottom: none;
+    border-right: 1px #444 solid;
+    width: 33vw;
+    padding: 0 5%;
+  }
+  
+  #vhalf2 {
+    grid-row: 1;
+    grid-column: 3;
+    height: 80vh;
+    width: 33vw;
+    padding: 5% 1%;
+  }
+
+  .vhiddable {
+    display: none;
+    width: 0;
+  }
+
+  .player-card {
+    text-align: justify;
+    padding: 0.8em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition-duration: 200ms;
+    width: 100%;
+    height: 60vh;
+    font-family: "HUN";
+  }  
+
+  .ranks_row {
+    width: 100%;
+    height: 13vh;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-family: "HUN";
+    font-size: 3vh;
+    justify-content: space-between;
+    padding: 0.2em 0.8em;
+    border-radius: 15px;
+  }
+}
+
+
+
 @media screen and (max-width: 600px) {
+  .app {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    height: 230vh;
+  }  
+
+  #half1 {
+    grid-row: 1;
+    grid-column: 1;
+    border-right: 1px #444 solid;
+    width: 90vw;
+    height: 80vh;
+    overflow-y: scroll;
+  }
+  
+  #vhalf1 {
+    grid-row: 2;
+    grid-column: 1;
+    height: 80vh;
+    border-bottom: none;
+    border-right: 1px #444 solid;
+    width: 90vw;
+    padding: 0 5%;
+  }
+  
+  #vhalf2 {
+    grid-row: 3;
+    grid-column: 1;
+    height: 80vh;
+    width: 90vw;
+    padding: 5% 1%;
+  }
+
+  .player-card {
+    height: 40vh
+  }
+
   .hiddable {
     display: none;
     width: 0;

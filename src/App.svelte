@@ -17,13 +17,11 @@
       <div class="half" id="half1">
         <CountryLB api_res={json}/>
       </div>
-      <div class="half" id="half2">
-        <div class="vhalf" id="vhalf1">
-          <Ranks api_res={json}/>
-        </div>
-        <div class="vhalf" id="vhalf2">
-          <Card/>
-        </div>
+      <div class="vhalf" id="vhalf1">
+        <Ranks api_res={json}/>
+      </div>
+      <div class="vhalf" id="vhalf2">
+        <Card/>
       </div>
     </div>
     <div class="btns is-spaced">
