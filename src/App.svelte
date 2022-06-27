@@ -29,14 +29,20 @@
         ><button class="button is-info is-light">Home</button></a
       >
       <button
+        class="button is-link is-light"
+        on:click={() => window.open('https://github.com/Cankyre/TetoStats','_blank')}
+      >
+        Help
+      </button>
+      <button
         class="button is-danger is-light"
-        onclick={() => window.open('https://cankyre.github.io/form/','_blank')}
+        on:click={() => window.open('https://cankyre.github.io/form/','_blank')}
       >
         Report
       </button>
       <button
         class="button is-warning is-light"
-        onclick={() => window.open('https://cankyre.github.io/rules/','_blank')}
+        on:click={() => window.open('https://cankyre.github.io/rules/','_blank')}
       >
         Rules
       </button>
