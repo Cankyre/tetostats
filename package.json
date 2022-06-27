@@ -14,6 +14,7 @@
     "vite": "^2.9.9"
   },
   "dependencies": {
+    "svelte-collapsible-card": "^0.0.2",
     "vite-plugin-singlefile": "^0.10.0-beta.2"
   }
 }

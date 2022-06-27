@@ -1,4 +1,17 @@
 <script>
+  import CollapsibleCard from './CollapsibleCard.svelte'
+  const stats = [
+      "tr",
+      "apm",
+      "pps",
+      "vs",
+      "wr",
+      "app",
+      "dsps",
+      "dspp",
+      "ci" ,
+      "ge",
+    ]
   const ranks_colors = {
     a: "#0c5919",
     "a+": "#126309",
@@ -25,32 +38,42 @@
 <h1 class="title is-5">Rank caps</h1>
 <div id="ranks">
   {#each Object.keys(api_res["ranks_boundaries"]) as r}
-    <div class="ranks_row" style="background-color: {ranks_colors[r] || "black"}">
-      <div class="a">
-        <img src="https://tetr.io/res/league-ranks/{r}.png" alt={r}>
-        <p>{api_res.ranks_boundaries[r].toFixed()}
-          <span class="hiddable">TR</span>
-          {@html  (() => {
-              if (api_res.ranks_variations[r] > 0) {
-                return '<span class="arrow" style="color: white"> 🡽 </span>'
-              } else if (api_res.ranks_variations[r] < 0) {
-                return '<span class="arrow" style="color: white"> 🡾 </span>'
-              } else {
-                return '<span class="arrow" style="color: white"> 🡺 </span>'
-              }
-          })()}
-        </p>
+    <CollapsibleCard className="collapsible">
+      <div slot="header" class="ranks_row" style="background-color: {ranks_colors[r] || "black"}">
+        <div class="a">
+          <img src="https://tetr.io/res/league-ranks/{r}.png" alt={r}>
+          <p>{api_res.ranks_boundaries[r].toFixed()}
+            <span class="hiddable">TR</span>
+            {@html  (() => {
+                if (api_res.ranks_variations[r] > 0) {
+                  return '<span class="arrow" style="color: white"> 🡽 </span>'
+                } else if (api_res.ranks_variations[r] < 0) {
+                  return '<span class="arrow" style="color: white"> 🡾 </span>'
+                } else {
+                  return '<span class="arrow" style="color: white"> 🡺 </span>'
+                }
+            })()}
+          </p>
+        </div>
+        <div>
+          <p>
+          {api_res.ranks_playernum[r]} p<span class="hiddable">layers</span>
+          </p>
+        </div>
+        <div>
+          <p>{
+            (100 * api_res.ranks_playernum[r] / api_res["ranked_num"]).toFixed(2)
+          }% <span class="hiddable">({api_res.ranks_percentiles[r]}%)</span></p>
+        </div>
       </div>
-      <div>
-        <p>
-        {api_res.ranks_playernum[r]} p<span class="hiddable">layers</span>
-        </p>
+      <div slot="body" class="card-grid ranks-avg">
+        {#each stats.slice(1) as stat}
+          <div class="grid-entry">
+            <h4 class="title is-6">Average {stat.toUpperCase()}</h4>
+            <h4 class="subtitle is-6">{api_res.ranks_avg[stat][r].toFixed(2)}</h4>
+          </div>
+        {/each}
       </div>
-      <div>
-        <p>{
-          (100 * api_res.ranks_playernum[r] / api_res["ranked_num"]).toFixed(2)
-        }% <span class="hiddable">({api_res.ranks_percentiles[r]}%)</span></p>
-      </div>
-    </div>
+    </CollapsibleCard>
   {/each}
 </div>

@@ -67,7 +67,19 @@ body {
   justify-content: space-between;
   padding: 0.2em 0.8em;
   border-radius: 15px;
+}
+
+.collapsible {
   margin-bottom: 1em;
+}
+
+.body {
+  margin-top: 0.5em;
+}
+
+.ranks-avg {
+  border: #888 2px solid;
+  border-radius: 10px;
 }
 
 .ranks_row div {
@@ -80,6 +92,11 @@ body {
 .ranks_row div img {
   height: 5vh;
   border-radius: 15px;
+}
+
+.coming-soon {
+  text-align: center;
+  margin-bottom: 50%;
 }
 
 table {
@@ -106,7 +123,7 @@ table td img {
   margin-bottom: 0.8em;
 }
 
-.card {
+.player-card {
   text-align: justify;
   padding: 0.8em;
   position: relative;
@@ -272,6 +289,10 @@ table td img {
   justify-content: center;
 }
 
+.tabs {
+  flex-direction: column;
+}
+
 @media screen and (max-width: 900px) {
   * {
     scrollbar-width: unset;
@@ -357,18 +378,18 @@ table td img {
     color: rgb(236, 236, 236) !important;
   }
 
-  .card {
+  .player-car {
     display: flex;
     border: 2px #444 solid !important;
     box-shadow: 0 0.5em 1em -0.125em #111;
     background-color: #222;
   }
 
-  .card:hover {
+  .player-car:hover {
     border: 2px #666 solid !important;
   }
 
-  .card > p {
+  .player-car > p {
     color: rgb(236, 236, 236);
   }
 
